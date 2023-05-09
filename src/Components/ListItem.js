@@ -1,6 +1,8 @@
-ListItem = () =>{
+import { CurrentItemContext, ListItemContext } from "../Contexts"
+
+const ListItem = () =>{
     return <>
-        <CurrentItem.Consumer>
+        <CurrentItemContext.Consumer>
             {
                 currItemContextValue =>
                     <ListItemContext.Consumer>
@@ -9,6 +11,8 @@ ListItem = () =>{
                         }
                     </ListItemContext.Consumer>
             }
-        </CurrentItem.Consumer>
+        </CurrentItemContext.Consumer>
     </>
 }
+
+export { ListItem }

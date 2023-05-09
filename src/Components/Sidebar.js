@@ -1,7 +1,10 @@
-Sidebar = () => {
-    let listItemsData = <SearchBox></SearchBox>;
+import { ListItemContext } from "../Contexts";
+import { SearchBox, ListItem } from ".";
 
-    return <>
+const Sidebar = () => {
+    let listItemsData = <SearchBox />;
+
+    /*return <>
         {
             listItemsData.forEach(listItemData => {
                 <ListItemContext.Provider value={ {data: listItemData.ListItems}}>
@@ -9,5 +12,7 @@ Sidebar = () => {
                 </ListItemContext.Provider>
                 })
         }
-    </>
+    </>*/
+    return listItemsData;
 }
+export { Sidebar }

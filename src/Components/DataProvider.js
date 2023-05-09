@@ -1,4 +1,8 @@
-DataProvider = () => {
+import { useEffect, useState } from "react";
+import { SearchContext } from "../Contexts";
+import { ListItem } from "./ListItem";
+
+const DataProvider = () => {
     const [db, setDb] = useState(null);
     const [records, setRecords] = useState([]);
   
@@ -30,9 +34,9 @@ DataProvider = () => {
         const request = objectStore.getAll();
   
         request.onsuccess = () => {
-            <Search.Consumer>
+            <SearchContext.Consumer>
                 { searchText => setRecords(request.result.filter(rec => rec.title.constains(searchText) || rec.text.constains(searchText))) }
-          </Search.Consumer>
+          </SearchContext.Consumer>
         };
   
         request.onerror = (event) => {
@@ -41,9 +45,9 @@ DataProvider = () => {
       }
     }, [db]);
   
-    const addRecord = (event) => {
+    const addRecord = (record, event) => {
       event.preventDefault();
-      const record = { id: Date.now(), name: 'New Record' };
+      //const record = { id: Date.now(), name: 'New Record' };
   
       if (db) {
         // Add a new record to the object store
@@ -63,6 +67,14 @@ DataProvider = () => {
   
     return (
 
-        { value: records }
-    );
+        records.map(r => <ListItem title={r.title} text={r.text}/>)
+    )
 }
+
+const dataProvider = <DataProvider />;
+
+const addRecord = (record) => {
+  dataProvider.addRecord(record)
+}
+
+export {DataProvider, addRecord}
